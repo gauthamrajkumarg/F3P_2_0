@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>Result</title>
+<!-- 
+
+Get Ready Template
+
+https://templatemo.com/tm-521-get-ready
+
+-->
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="team" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+     
+     <!-- MAIN CSS -->
+  
+
+</head>
+<body  style="background-size:cover; background-image: url('/static/myapp/images/r1.jpg');  no-repeat;" >
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="{% url 'admin_home' %}">Player Evaluation</a>
+  
+  <!-- Links -->
+  <ul class="navbar-nav ml-auto"> 
+        <li class="nav-item">
+      <a class="nav-link" href="{% url 'admin_home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'about' %}">About us</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'admin_changepassword' %}">Change password</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
+    </li>
+
+      <a href="{% url 'index' %}">
+<button class="btn btn-primary" type="button">Log out</button>
+
+     </a>
+    
+   
+  </ul>
+
+</nav>
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+
+               <span class="spinner-rotate"></span>
+               
+          </div>
+     </section>
+
+
+     <!-- GRID LINE -->
+   
+
+
+    
+
+
+     <!-- HOME -->
+     <section id="home">
+        <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                         <div style="color:white; padding-top:30%" class="home-info">
+                              <h1>{{msg}} : € {{estimate}} </h1>
+                              <!-- You can change the date time in init.js file -->
+                              <br/>
+                              <br/>
+                               <h1>{{msg2}} : {{overall}} % </h1>
+                               <br/>
+                              <br/>
+
+<br/>
+                              <br/>
+
+                             
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+     <!-- SCRIPTS -->
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enter Details</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+   
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .openBtn {
+        display: flex;
+        justify-content: left;
+      }
+      .openButton {
+        border: none;
+        border-radius: 5px;
+        background-color: #1c87c9;
+        color: white;
+        padding: 14px 20px;
+        cursor: pointer;
+        position: fixed;
+      }
+      .loginPopup {
+        position: relative;
+        text-align: center;
+        width: 100%;
+      }
+      .formPopup {
+        display: none;
+        position: fixed;
+        left: 45%;
+        top: 5%;
+        transform: translate(-50%, 5%);
+        border: 3px solid #999999;
+        z-index: 9;
+      }
+      .formContainer {
+        max-width: 300px;
+        padding: 20px;
+        background-color: #fff;
+      }
+      .formContainer input[type=text],
+      .formContainer input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+      }
+      .formContainer input[type=text]:focus,
+      .formContainer input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+      }
+      .formContainer .btn {
+        padding: 12px 20px;
+        border: none;
+        background-color: #8ebf42;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+      .formContainer .cancel {
+        background-color: #cc0000;
+      }
+      .formContainer .btn:hover,
+      .openButton:hover {
+        opacity: 1;
+      }
+
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, textarea, label { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      position: absolute;
+      margin:0;
+      font-size: 60px;
+      color: #fff;
+      z-index: 2;
+      line-height: 83px;
+      top:30px;
+      }
+      legend {
+      padding: 10px;      
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 18px;
+      color: #fff;
+      background-color: #1c87c9;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 20px;
+      }
+      form {
+      width: 70%;
+      padding: 20px;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 0 8px #006622; 
+      }
+      .banner {
+      position: relative;
+      height: 250px;
+      background-image: url("/static/myapp/images/m3.jpg");  
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 80%
+      }
+      .banner::after {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.4); 
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      input[type="date"] {
+      padding: 4px 5px;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .item:hover p, .item:hover i, .question:hover p, .question label:hover, input:hover::placeholder {
+      color:  #006622;
+      }
+      .checkbox input[type=checkbox] {
+      display:inline-block;
+      height:15px;
+      width:15px;
+      margin-right:5px;
+      vertical-align:text-top;
+      }
+      .item input:hover, .item select:hover, .item textarea:hover {
+      border: 1px solid transparent;
+      box-shadow: 0 0 3px 0  #006622;
+      color: #006622;
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      .item span {
+      color: red;
+      }
+      .week {
+      display:flex;
+      justfiy-content:space-between;
+      }
+      .colums {
+      display:flex;
+      justify-content:space-between;
+      flex-direction:row;
+      flex-wrap:wrap;
+      }
+      .colums div {
+      width:48%;
+      }
+      input[type=radio], input[type=checkbox]  {
+      display: none;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      margin: 5px 20px 15px 0;
+      cursor: pointer;
+      }
+      .question span {
+      margin-left: 30px;
+      }
+      .question-answer label {
+      display: block;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      }
+      input[type=radio]:checked + label:before, label.radio:hover:before {
+      border: 2px solid  #006622;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 5px;
+      width: 8px;
+      height: 4px;
+      border: 3px solid  #006622;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      .flax {
+      display:flex;
+      justify-content:space-around;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px; 
+      background:  #1c87c9;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background:  #0692e8;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item input, .name-item div {
+      width: calc(50% - 20px);
+      }
+      .name-item div input {
+      width:97%;}
+      .name-item div label {
+      display:block;
+      padding-bottom:5px;
+      }
+      }
+    </style>
+  </head>
+  <body style="background-size:cover; background-image: url('/static/myapp/images/l1.jpg');  no-repeat;" >
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="{% url 'user_home' %}">Player Evaluation</a>
+  
+  <!-- Links -->
+  <ul class="navbar-nav ml-auto"> 
+        <li class="nav-item">
+      <a class="nav-link" href="{% url 'user_home' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'about' %}">About us</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'user_query_add' %}">User</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
+    </li>
+
+      <a href="{% url 'index' %}">
+<button class="btn btn-primary" type="button">Log out</button>
+
+     </a>
+    
+   
+  </ul>
+
+</nav>
+
+    <div class="testbox">
+    <form style="background: #f7fff0e0;;border: 0px solid #f1f1f1;" name="frm" action="{% url 'user_query_add' %}" method="post">
+            {% csrf_token %}
+      <div class="banner">
+        <h2 style="z-index: 1;color: white">Enter Player Details</h2>
+      </div>
+      <br/>
+      <table>
+        <tr>
+            <td width="50%">
+                  <div style="padding-right: 50px;padding-top: 10px">
+      <fieldset>
+        
+        <div class="colums">
+            <legend>General</legend>
+          <div class="item">
+            <label for="age">age<span>*</span></label>
+            <input id="age" type="number" name="age" value="32" />
+          </div>
+          
+          <div class="item">
+            <label for="height_cm">height_cm<span>*</span></label>
+            <input id="height_cm" type="number" name="height_cm" value="170" />
+          </div>
+          <div class="item">
+            <label for="player_positions">Player position<span>*</span></label>
+            <select style="width: calc(100% - 10px);height: 50%;" id="player_positions" name="player_positions">
+             <option value="CF">CF</option>
+              <option value="GK">GK</option>
+              <option value="MID">MID</option>
+              <option value="DEF">DEF</option>
+          </select></div>
+           <div class="item">
+            <label for="weight_kg">weight_kg<span>*</span></label>
+            <input id="weight_kg" type="number" name="weight_kg" value="72" />
+          </div> <div class="item">
+            <label for="weak_foot">weak_foot<span>*</span></label>
+            <input id="weak_foot" type="number" name="weak_foot" value="4" />
+          </div> <div class="item">
+            <label for="movement_acceleration">movement_acceleration<span>*</span></label>
+            <input id="movement_acceleration" type="number" name="movement_acceleration" value="91" />
+          </div> <div class="item">
+            <label for="movement_sprint_speed">movement_sprint_speed<span>*</span></label>
+            <input id="movement_sprint_speed" type="number" name="movement_sprint_speed" value="84"/>
+          </div> <div class="item">
+            <label for="movement_agility">movement_agility<span>*</span></label>
+            <input id="movement_agility" type="number" name="movement_agility" value="93" />
+          </div> <div class="item">
+            <label for="movement_reactions">movement_reactions<span>*</span></label>
+            <input id="movement_reactions" type="number" name="movement_reactions" value="95" />
+          </div> <div class="item">
+            <label for="movement_balance">movement_balance<span>*</span></label>
+            <input id="movement_balance" type="number" name="movement_balance" value="95" />
+          </div>
+          <div class="item">
+            <label for="power_shot_power">power_shot_power<span>*</span></label>
+            <input id="power_shot_power" type="number" name="power_shot_power" value="86" />
+          </div>
+          <div class="item">
+            <label for="power_jumping">power_jumping<span>*</span></label>
+            <input id="power_jumping" type="number"   name="power_jumping" value="68"/>
+          </div>
+          <div class="item">
+            <label for="power_stamina">power_stamina<span>*</span></label>
+            <input id="power_stamina" type="number"   name="power_stamina" value="75" />
+          </div>
+          <div class="item">
+            <label for="power_strength">power_strength<span>*</span></label>
+            <input id="power_strength" type="number"   name="power_strength" value="68"/>
+          </div>
+          <div class="item">
+            <label for="power_long_shots">power_long_shots<span>*</span></label>
+            <input id="power_long_shots" type="number"   name="power_long_shots" value="94" />
+          </div>
+          <div class="item">
+            <label for="mentality_aggression">mentality_aggression<span>*</span></label>
+            <input id="mentality_aggression" type="number"   name="mentality_aggression" value="48"/>
+          </div>
+          <div class="item">
+            <label for="mentality_interceptions">mentality_interceptions<span>*</span></label>
+            <input id="mentality_interceptions" type="number"   name="mentality_interceptions" value="40" />
+          </div>
+          <div class="item">
+            <label for="mentality_positioning">mentality_positioning<span>*</span></label>
+            <input id="mentality_positioning" type="number"   name="mentality_positioning" value="94" />
+          </div>
+          <div class="item">
+            <label for="mentality_vision">mentality_vision<span>*</span></label>
+            <input id="mentality_vision" type="number"   name="mentality_vision" value="94" />
+          </div>
+          <div class="item">
+            <label for="mentality_penalties">mentality_penalties<span>*</span></label>
+            <input id="mentality_penalties" type="number"   name="mentality_penalties" value="75" />
+          </div>
+          <div class="item">
+            <label for="mentality_composure">mentality_composure<span>*</span></label>
+            <input id="mentality_composure" type="number"   name="mentality_composure" value="96" />
+          </div>
+
+      </fieldset>
+      </div>
+  </td>
+
+  <td width="50%">
+    <div style="padding-left: 50px">
+      <fieldset>
+     
+        <div class="colums">
+             <legend>Defence</legend>
+          <div class="item">
+            <label for="defending_marking">defending_marking<span>*</span></label>
+            <input id="defending_marking" type="number" name="defending_marking" value="33" />
+          </div>
+          <div class="item">
+            <label for="defending_standing_tackle">defending_standing_tackle<span>*</span></label>
+            <input id="defending_standing_tackle" type="number" name="defending_standing_tackle" value="37" />
+          </div>
+          <div class="item">
+            <label for="defending_sliding_tackle">defending_sliding_tackle<span>*</span></label>
+            <input id="defending_sliding_tackle" type="number" name="defending_sliding_tackle" value="26" />
+          </div>
+          <div class="item">
+            <label for="goalkeeping_diving">goalkeeping_diving<span>*</span></label>
+            <input id="goalkeeping_diving" type="number" name="goalkeeping_diving" value="6"/>
+          </div>
+          <div class="item">
+            <label for="goalkeeping_handling">goalkeeping_handling<span>*</span></label>
+            <input id="goalkeeping_handling" type="number" name="goalkeeping_handling" value="11" />
+          </div>
+          <div class="item">
+            <label for="goalkeeping_kicking">goalkeeping_kicking<span>*</span></label>
+            <input id="goalkeeping_kicking" type="number" name="goalkeeping_kicking" value="15"/>
+          </div>
+          <div class="item">
+            <label for="goalkeeping_positioning">goalkeeping_positioning<span>*</span></label>
+            <input id="goalkeeping_positioning" type="number" name="goalkeeping_positioning" value="14" />
+          </div>
+          <div class="item">
+            <label for="goalkeeping_reflexes">goalkeeping_reflexes<span>*</span></label>
+            <input id="goalkeeping_reflexes" type="number" name="goalkeeping_reflexes" value="8"/>
+          </div>
+      </fieldset>
+
+    <br/>
+      <fieldset>
+     
+        <div class="colums">
+             <legend>Attack</legend>
+          <div class="item">
+            <label for="skill_moves">Skill moves<span>*</span></label>
+            <input id="skill_moves" type="number" name="skill_moves" value="4" />
+          </div>
+          <div class="item">
+            <label for="attacking_crossing">attacking_crossing<span>*</span></label>
+            <input id="attacking_crossing" type="number" name="attacking_crossing" value="88"/>
+          </div>
+          <div class="item">
+            <label for="attacking_finishing">attacking_finishing<span>*</span></label>
+            <input id="attacking_finishing" type="number" name="attacking_finishing" value="95"/>
+          </div>
+          <div class="item">
+            <label for="attacking_heading_accuracy">attacking_heading_accuracy<span>*</span></label>
+            <input id="attacking_heading_accuracy" type="number" name="attacking_heading_accuracy" value="70"/>
+          </div>
+          <div class="item">
+            <label for="attacking_short_passing">attacking_short_passing<span>*</span></label>
+            <input id="attacking_short_passing" type="number" name="attacking_short_passing" value="92"/>
+          </div>
+          <div class="item">
+            <label for="attacking_volleys">attacking_volleys<span>*</span></label>
+            <input id="attacking_volleys" type="number" name="attacking_volleys" value="88"/>
+          </div>
+          <div class="item">
+            <label for="skill_dribbling">skill_dribbling<span>*</span></label>
+            <input id="skill_dribbling" type="number" name="skill_dribbling" value="97"/>
+          </div>
+          <div class="item">
+            <label for="skill_curve">skill_curve<span>*</span></label>
+            <input id="skill_curve" type="number" name="skill_curve" value="93"/>
+          </div>
+          <div class="item">
+            <label for="skill_fk_accuracy">skill_fk_accuracy<span>*</span></label>
+            <input id="skill_fk_accuracy" type="number" name="skill_fk_accuracy" value="94"/>
+          </div>
+          <div class="item">
+            <label for="skill_long_passing">skill_long_passing<span>*</span></label>
+            <input id="skill_long_passing" type="number" name="skill_long_passing" value="92"/>
+          </div>
+          <div class="item">
+            <label for="skill_ball_control">skill_ball_control<span>*</span></label>
+            <input id="skill_ball_control" type="number" name="skill_ball_control" value="96"/>
+          </div>
+
+
+      
+      </fieldset>
+  </div>
+  </td>
+</table>
+      <div class="btn-block">
+      <button type="Submit" onclick="openForm();"  href="/">Submit</button>
+      </div>
+    </form>
+    </div>
+    
+    </div>
+
+    
+</div>
+
+
+
+
+  </body>
+</html>
+
+<script type="text/javascript">
+    
+
+
+function openForm() {
+
+setTimeout(function(){
+  // call the plugin here
+   document.getElementById("popupForm").style.display = "block";
+},1000);
+       
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+      }
+</script>

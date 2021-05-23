@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head >
+    <title>Simple login form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+
+    <style>
+      html, body {
+      display: flex;
+      justify-content: center;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 15px;
+      }
+
+      .tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+    font-size: 17px;
+  width: 50%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 50px;
+  text-align: center;
+}
+
+      form {
+      border: 5px solid #f1f1f1;
+      }
+      input[type=text], input[type=password] {
+      width: 100%;
+      padding: 16px 8px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      }
+      button {
+      background-color: #8ebf42;
+      color: white;
+      padding: 14px 0;
+      margin: 10px 0;
+      border: none;
+      cursor: grabbing;
+      width: 100%;
+      }
+      h1 {
+      text-align:center;
+      fone-size:18;
+      }
+      button:hover {
+      opacity: 0.8;
+      }
+      .formcontainer {
+      text-align: left;
+      margin: 24px 50px 12px;
+      }
+      .container {
+      padding: 16px 0;
+      text-align:left;
+      }
+      span.psw {
+      float: right;
+      padding-top: 0;
+      padding-right: 15px;
+      }
+      /* Change styles for span on extra small screens */
+      @media screen and (max-width: 300px) {
+      span.psw {
+      display: block;
+      float: none;
+      }
+
+
+      #user {background-color:green;}
+#admin {background-color:blue;}
+
+    </style>
+  </head>
+
+  <body  style="background-size:cover; background-image: url('/static/myapp/images/l1.jpg');  no-repeat;" >
+    
+     
+  <div>
+        <button style="width: 41%;margin-left:50px" id="defaultOpen" class="tablink" onclick="opemTab('user',this,'RGB(142, 191, 66)')">User</button>
+        <button style="width: 45%" class="tablink" onclick="opemTab('admin',this,'RGB(142, 191, 66)')">Admin</button>
+     
+ 
+<div id="user" class="tabcontent" >
+    <form style="background: #f0ffff45;border: 0px solid #f1f1f1;" action="{% url 'user_login' %}" method="post">
+            {% csrf_token %}
+      <h1 style="color:white">Login Form</h1>
+      <div class="formcontainer">
+      <hr/>
+      <div class="container">
+        <label for="uname"><strong style="color:white">Username</strong></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label for="passwd"><strong style="color:white">Password</strong></label>
+        <input type="password" placeholder="Enter Password" name="passwd" required>
+      </div>
+      <button type="submit">Login</button>
+      <a href="{% url 'user_details_add' %}">
+ <button type="button">Sign up</button>
+     </a>
+   </div>
+    </form>
+</div>
+
+
+<div  id="admin" class="tabcontent" >
+  <form style="background: #f0ffff45;border: 0px solid #f1f1f1;" action="{% url 'admin_login' %}" method="post">
+            {% csrf_token %}
+      <h1 style="color:white">Login Form</h1>
+      <div class="formcontainer">
+      <hr/>
+      <div class="container">
+        <label for="uname"><strong style="color:white">Username</strong></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label for="passwd"><strong style="color:white">Password</strong></label>
+        <input type="password" placeholder="Enter Password" name="passwd" required>
+      </div>
+      <button type="submit">Login</button>
+      <a href="{% url 'user_details_add' %}">
+ <button type="button">Sign up</button>
+     </a>
+
+    </form>
+</div>
+</div>
+    <script>
+
+ function opemTab(tName,elmnt,color) {
+  var i, tabcontent, tablinks;
+
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+ 
+tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(tName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+</script>
+  </body>
+</html>
